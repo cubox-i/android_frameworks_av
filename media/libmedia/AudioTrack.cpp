@@ -2,6 +2,7 @@
 ** Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
 ** Not a Contribution.
 ** Copyright 2007, The Android Open Source Project
+** Copyright (C) 2012 Freescale Semiconductor, Inc.
 **
 ** Licensed under the Apache License, Version 2.0 (the "License");
 ** you may not use this file except in compliance with the License.
@@ -438,6 +439,7 @@ status_t AudioTrack::set(
     mAuxEffectId = 0;
     mFlags = flags;
     mCbf = cbf;
+    mOutput = output;
 #ifdef QCOM_DIRECTTRACK
     mSampleRate = sampleRate;
 
@@ -1027,6 +1029,13 @@ status_t AudioTrack::reload()
     // Need to check how the old code handled this, and whether it's a significant change.
     mStaticProxy->setLoop(0, mFrameCount, 0);
     return NO_ERROR;
+}
+
+audio_io_handle_t AudioTrack::getCurrentOutput()
+{
+    AutoMutex lock(mLock);
+    ALOGV("AudioTrack::getCurrentOutput %d",mOutput);
+    return mOutput;
 }
 
 audio_io_handle_t AudioTrack::getOutput()

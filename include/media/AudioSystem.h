@@ -2,6 +2,7 @@
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
  * Not a Contribution.
  * Copyright (C) 2008 The Android Open Source Project
+** Copyright (C) 2012 Freescale Semiconductor, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -107,6 +108,9 @@ public:
     static status_t getFrameCount(audio_io_handle_t output,
                                   audio_stream_type_t stream,
                                   size_t* frameCount);
+    static status_t getFlags(audio_io_handle_t output,
+                                  audio_stream_type_t streamType,
+                                  int* flags);
     // returns the audio output stream latency in ms. Corresponds to
     // audio_stream_out->get_latency()
     static status_t getLatency(audio_io_handle_t output,
@@ -161,13 +165,14 @@ public:
     class OutputDescriptor {
     public:
         OutputDescriptor()
-        : samplingRate(0), format(AUDIO_FORMAT_DEFAULT), channelMask(0), frameCount(0), latency(0)  {}
+        : samplingRate(0), format(AUDIO_FORMAT_DEFAULT), channelMask(0), frameCount(0), latency(0), flags(AUDIO_OUTPUT_FLAG_NONE) {}
 
         uint32_t samplingRate;
         audio_format_t format;
         audio_channel_mask_t channelMask;
         size_t frameCount;
         uint32_t latency;
+        audio_output_flags_t flags;
     };
 
     // Events used to synchronize actions between audio sessions.
