@@ -16,6 +16,8 @@
  * limitations under the License.
  */
 
+/* Copyright 2009-2013 Freescale Semiconductor Inc. */
+
 #ifndef ANDROID_MEDIAPLAYERINTERFACE_H
 #define ANDROID_MEDIAPLAYERINTERFACE_H
 
@@ -53,6 +55,7 @@ enum player_type {
     // argument to the 'test:' url in the setDataSource call.
     TEST_PLAYER = 5,
     DASH_PLAYER = 6,
+    OMX_PLAYER = 7,
 };
 
 
