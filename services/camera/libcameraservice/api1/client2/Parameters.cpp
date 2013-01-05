@@ -92,7 +92,7 @@ status_t Parameters::initialize(const CameraMetadata *info) {
         staticInfo(ANDROID_CONTROL_AE_AVAILABLE_TARGET_FPS_RANGES, 2);
     if (!availableFpsRanges.count) return NO_INIT;
 
-    previewFormat = HAL_PIXEL_FORMAT_YCrCb_420_SP;
+    previewFormat = HAL_PIXEL_FORMAT_YCbCr_420_SP;
     params.set(CameraParameters::KEY_PREVIEW_FORMAT,
             formatEnumToString(previewFormat)); // NV21
 
@@ -113,7 +113,7 @@ status_t Parameters::initialize(const CameraMetadata *info) {
                 supportedPreviewFormats +=
                     CameraParameters::PIXEL_FORMAT_YUV422SP;
                 break;
-            case HAL_PIXEL_FORMAT_YCrCb_420_SP:
+            case HAL_PIXEL_FORMAT_YCbCr_420_SP:
                 supportedPreviewFormats +=
                     CameraParameters::PIXEL_FORMAT_YUV420SP;
                 break;
@@ -2082,11 +2082,11 @@ const char* Parameters::getStateName(State state) {
 int Parameters::formatStringToEnum(const char *format) {
     return
         !format ?
-            HAL_PIXEL_FORMAT_YCrCb_420_SP :
+            HAL_PIXEL_FORMAT_YCbCr_420_SP :
         !strcmp(format, CameraParameters::PIXEL_FORMAT_YUV422SP) ?
             HAL_PIXEL_FORMAT_YCbCr_422_SP : // NV16
         !strcmp(format, CameraParameters::PIXEL_FORMAT_YUV420SP) ?
-            HAL_PIXEL_FORMAT_YCrCb_420_SP : // NV21
+            HAL_PIXEL_FORMAT_YCbCr_420_SP : // NV21
         !strcmp(format, CameraParameters::PIXEL_FORMAT_YUV422I) ?
             HAL_PIXEL_FORMAT_YCbCr_422_I :  // YUY2
         !strcmp(format, CameraParameters::PIXEL_FORMAT_YUV420P) ?
@@ -2106,7 +2106,7 @@ const char* Parameters::formatEnumToString(int format) {
         case HAL_PIXEL_FORMAT_YCbCr_422_SP: // NV16
             fmt = CameraParameters::PIXEL_FORMAT_YUV422SP;
             break;
-        case HAL_PIXEL_FORMAT_YCrCb_420_SP: // NV21
+        case HAL_PIXEL_FORMAT_YCbCr_420_SP: // NV21
             fmt = CameraParameters::PIXEL_FORMAT_YUV420SP;
             break;
         case HAL_PIXEL_FORMAT_YCbCr_422_I: // YUY2
