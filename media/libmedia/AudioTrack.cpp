@@ -2,7 +2,7 @@
 ** Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
 ** Not a Contribution.
 ** Copyright 2007, The Android Open Source Project
-** Copyright (C) 2012 Freescale Semiconductor, Inc.
+** Copyright (C) 2012-2013 Freescale Semiconductor, Inc.
 **
 ** Licensed under the Apache License, Version 2.0 (the "License");
 ** you may not use this file except in compliance with the License.
@@ -811,8 +811,8 @@ status_t AudioTrack::setSampleRate(uint32_t rate)
     if (AudioSystem::getOutputSamplingRate(&afSamplingRate, mStreamType) != NO_ERROR) {
         return NO_INIT;
     }
-    // Resampler implementation limits input sampling rate to 2 x output sampling rate.
-    if (rate == 0 || rate > afSamplingRate*2 ) {
+    // Resampler implementation limits input sampling rate to 8 x output sampling rate.
+    if (rate == 0 || rate > afSamplingRate*8 ) {
         return BAD_VALUE;
     }
 
