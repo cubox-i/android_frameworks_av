@@ -501,11 +501,15 @@ void AudioSource::queueInputBuffer_l(MediaBuffer *buffer, int64_t timeUs) {
     }
     timestampUs += recordDurationUs;
 #else
-   const int64_t timestampUs =
+    int64_t timestampUs =
                 mPrevSampleTimeUs +
                     ((1000000LL * (bufferSize / frameSize)) +
                         (mSampleRate >> 1)) / mSampleRate;
 #endif
+
+    if (mRecord->inputSource() == AUDIO_SOURCE_REMOTE_SUBMIX) {
+        timestampUs = timeUs;
+    }
 
     if (mNumFramesReceived == 0) {
         buffer->meta_data()->setInt64(kKeyAnchorTime, mStartTimeUs);
